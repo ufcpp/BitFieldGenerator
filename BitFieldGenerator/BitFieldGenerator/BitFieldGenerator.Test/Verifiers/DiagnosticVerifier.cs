@@ -17,18 +17,12 @@ namespace TestHelper
         /// <summary>
         /// Get the CSharp analyzer being tested - to be implemented in non-abstract class
         /// </summary>
-        protected virtual DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
-        {
-            return null;
-        }
+        protected virtual DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => null;
 
         /// <summary>
         /// Get the Visual Basic analyzer being tested (C#) - to be implemented in non-abstract class
         /// </summary>
-        protected virtual DiagnosticAnalyzer GetBasicDiagnosticAnalyzer()
-        {
-            return null;
-        }
+        protected virtual DiagnosticAnalyzer GetBasicDiagnosticAnalyzer() => null;
         #endregion
 
         #region Verifier wrappers
@@ -101,7 +95,7 @@ namespace TestHelper
         /// <param name="actualResults">The Diagnostics found by the compiler after running the analyzer on the source code</param>
         /// <param name="analyzer">The analyzer that was being run on the sources</param>
         /// <param name="expectedResults">Diagnostic Results that should have appeared in the code</param>
-        private static void VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer analyzer, params DiagnosticResult[] expectedResults)
+        protected static void VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer analyzer, params DiagnosticResult[] expectedResults)
         {
             int expectedCount = expectedResults.Count();
             int actualCount = actualResults.Count();
@@ -240,7 +234,7 @@ namespace TestHelper
                         else
                         {
                             Assert.IsTrue(location.IsInSource,
-                                $"Test base does not currently handle diagnostics in metadata locations. Diagnostic in metadata: {diagnostics[i]}\r\n");
+                                string.Format("Test base does not currently handle diagnostics in metadata locations. Diagnostic in metadata:\r\n", diagnostics[i]));
 
                             string resultMethodName = diagnostics[i].Location.SourceTree.FilePath.EndsWith(".cs") ? "GetCSharpResultAt" : "GetBasicResultAt";
                             var linePosition = diagnostics[i].Location.GetLineSpan().StartLinePosition;

@@ -20,19 +20,13 @@ namespace TestHelper
         /// Returns the codefix being tested (C#) - to be implemented in non-abstract class
         /// </summary>
         /// <returns>The CodeFixProvider to be used for CSharp code</returns>
-        protected virtual CodeFixProvider GetCSharpCodeFixProvider()
-        {
-            return null;
-        }
+        protected virtual CodeFixProvider GetCSharpCodeFixProvider() => null;
 
         /// <summary>
         /// Returns the codefix being tested (VB) - to be implemented in non-abstract class
         /// </summary>
         /// <returns>The CodeFixProvider to be used for VisualBasic code</returns>
-        protected virtual CodeFixProvider GetBasicCodeFixProvider()
-        {
-            return null;
-        }
+        protected virtual CodeFixProvider GetBasicCodeFixProvider() => null;
 
         /// <summary>
         /// Called to test a C# codefix when applied on the inputted string as a source
@@ -106,6 +100,8 @@ namespace TestHelper
                     // Format and get the compiler diagnostics again so that the locations make sense in the output
                     document = document.WithSyntaxRoot(Formatter.Format(document.GetSyntaxRootAsync().Result, Formatter.Annotation, document.Project.Solution.Workspace));
                     newCompilerDiagnostics = GetNewDiagnostics(compilerDiagnostics, GetCompilerDiagnostics(document));
+
+                    var xxx = document.GetSyntaxRootAsync().Result.ToString();
 
                     Assert.IsTrue(false,
                         string.Format("Fix introduced new compiler diagnostics:\r\n{0}\r\n\r\nNew document:\r\n{1}\r\n",

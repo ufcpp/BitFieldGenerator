@@ -33,6 +33,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CodeFixProvider.cs" />
+    <Compile Include="DataModels\BitFieldDefinition.cs" />
+    <Compile Include="DataModels\Field.cs" />
+    <Compile Include="DataModels\SyntaxExtensions.cs" />
     <Compile Include="DiagnosticAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
